@@ -1,7 +1,10 @@
 
 
+
 # 1. Zainicjuj repozytorium
 git init
+git branch -m master main
+
 
 # 2. Dodaj remote do GitHub, jeśli jeszcze nie dodałeś:
 git remote add origin git@github.com:suninweb/ghcr-beta3.git
