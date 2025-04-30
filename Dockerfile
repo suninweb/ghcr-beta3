@@ -1,3 +1,2 @@
-# Dockerfile
-FROM alpine:latest
-CMD ["echo", "Hello from GHCR! 🎉"]
+FROM alpine
+CMD ["echo", "Hello"]

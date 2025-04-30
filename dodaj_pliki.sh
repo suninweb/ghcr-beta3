@@ -1,0 +1,22 @@
+echo 'FROM alpine\nCMD ["echo", "Hello"]' > Dockerfile
+mkdir -p .github/workflows
+
+cat <<EOF > .github/workflows/publish.yml
+name: Build and Push Docker image to GHCR
+on: [push]
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+    - uses: actions/checkout@v3
+    - uses: docker/login-action@v3
+      with:
+        registry: ghcr.io
+        username: \${{ github.actor }}
+        password: \${{ secrets.GITHUB_TOKEN }}
+    - run: docker build -t ghcr.io/\${{ github.repository_owner }}/ghcr-test:latest .
+    - run: docker push ghcr.io/\${{ github.repository_owner }}/ghcr-test:latest
+EOF
